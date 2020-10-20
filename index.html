@@ -1,1 +1,49 @@
-<h1>Hi</hi>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test location</title>
+</head>
+<body>
+
+<h2>Drop in</h2>
+<div id="res" ></div>
+
+<script type="text/javascript" >
+
+var url = 'https://17cf00f6db32.au.ngrok.io/loc.php?coords=';
+
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+
+  var coords = crd.latitude + ',' + crd.longitude;
+
+  fetch(url + coords)
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+    })
+}
+
+function error(err) {
+  document.querySelector('#res').innerHTML = 'Could not get location :(';
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+</script>
+
+</body>
+</html>

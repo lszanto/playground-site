@@ -33,6 +33,14 @@ function success(pos) {
     .then(resp => resp.json())
     .then(data => {
         console.log(data);
+
+        var message = 'If you leave now you\'ll be here in roughly ';
+
+        if(data.hours > 0) message += data.hours +  ' hours';
+        if(data.hours > 0 && data.minutes > 0) message += ' and ';
+        if(data.minutes > 0) message += data.minutes + ' minutes';
+
+        message += '. Can\'t wait to see you!';
     })
 }
 

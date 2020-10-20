@@ -41,6 +41,8 @@ function success(pos) {
         if(data.minutes > 0) message += data.minutes + ' minutes';
 
         message += '. Can\'t wait to see you!';
+
+        document.querySelector('#res').innerHTML = message;
     })
 }
 
